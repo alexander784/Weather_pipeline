@@ -1,7 +1,7 @@
 import requests
 
 
-api_url = "https://api.weatherstack.com/current?access_key=c7c938710e613aa9fc104822f7e02b55&query=New York"
+api_url = "https://api.weatherstack.com/current?access_key=b6d4ec476bcfc235e0fa36b4366197e2&query=Nairobi"
 
 def fetch_data():
     print("Fetching weather data from weather stack....")
@@ -15,7 +15,7 @@ def fetch_data():
         print(f"An error occured: {e}")
         raise
 
-fetch_data()
+# fetch_data()
 
 
 

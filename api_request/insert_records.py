@@ -1,4 +1,7 @@
 import psycopg2
+from datetime import datetime
+from api_request import fetch_data
+
 
 def connect_to_db():
     print("Connecting to the PostgreSQL database...")
@@ -48,7 +51,58 @@ def create_table(conn):
         raise
 
 
+def insert_records(conn, data):
+    print("Inserting data into the database...")
+
+    insert_query = """
+        INSERT INTO dev.raw_weather_data (
+            city,
+            temperature,
+            weather_descriptions,
+            wind_speed,
+            time,
+            utc_offset
+        )
+        VALUES (%s, %s, %s, %s, %s, %s);
+    """
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute(
+            insert_query,
+            (
+                data["city"],
+                data["temperature"],
+                data["weather_descriptions"],
+                data["wind_speed"],
+                data["time"],
+                data["utc_offset"]
+            )
+        )
+        conn.commit()
+        cursor.close()
+        print("Data inserted successfully.")
+
+    except psycopg2.Error as e:
+        conn.rollback()
+        print(f"Failed to insert data: {e}")
+        raise
+
+
 if __name__ == "__main__":
     conn = connect_to_db()
     create_table(conn)
+
+    data = fetch_data()
+
+    data = {
+    "city": data["location"]["name"],
+    "temperature": data["current"]["temperature"],
+    "weather_descriptions": ", ".join(data["current"]["weather_descriptions"]),
+    "wind_speed": data["current"]["wind_speed"],
+    "time": datetime.utcnow(), 
+    "utc_offset": data["location"]["utc_offset"]
+}
+
+    insert_records(conn, data)
     conn.close()
