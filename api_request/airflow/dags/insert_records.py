@@ -8,8 +8,8 @@ def connect_to_db():
 
     try:
         conn = psycopg2.connect(
-            host="localhost",
-            port="5000",
+            host="postgres_container",
+            port="5432",
             dbname="db",
             user="db_user",
             password="db_password"
@@ -89,20 +89,24 @@ def insert_records(conn, data):
         raise
 
 
-if __name__ == "__main__":
+def main():
     conn = connect_to_db()
     create_table(conn)
 
     data = fetch_data()
 
     data = {
-    "city": data["location"]["name"],
-    "temperature": data["current"]["temperature"],
-    "weather_descriptions": ", ".join(data["current"]["weather_descriptions"]),
-    "wind_speed": data["current"]["wind_speed"],
-    "time": datetime.utcnow(), 
-    "utc_offset": data["location"]["utc_offset"]
-}
+        "city": data["location"]["name"],
+        "temperature": data["current"]["temperature"],
+        "weather_descriptions": ", ".join(data["current"]["weather_descriptions"]),
+        "wind_speed": data["current"]["wind_speed"],
+        "time": datetime.utcnow(),
+        "utc_offset": data["location"]["utc_offset"]
+    }
 
     insert_records(conn, data)
     conn.close()
+
+
+if __name__ == "__main__":
+    main()
