@@ -18,8 +18,14 @@ def example_task():
 
 default_args = {
     "description":"A DAG TO orchestrate data",
-    "start_date":datetime(2026, 1, 1),
+    "start_date":datetime(2026, 2, 14),
     "catchup":False,
+    "retries":3,
+    "retry_delay":timedelta(minutes=5),
+    "email": "alexanders7sg@gmail.com",  
+    "email_on_failure": True,
+    "email_on_retry": False,
+
 }
 dag = DAG(
     dag_id = "weather-orchestator",
@@ -33,3 +39,4 @@ with dag:
         task_id = "indgest_data",
         python_callable = safe_main_callable
     )
+
