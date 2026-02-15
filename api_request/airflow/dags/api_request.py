@@ -1,7 +1,7 @@
 import requests
 
 
-api_url = "https://api.weatherstack.com/current?access_key=b6d4ec476bcfc235e0fa36b4366197e2&query=Nairobi"
+api_url = "https://api.weatherstack.com/current?access_key=bb&query=Nairobi"
 
 def fetch_data():
     print("Fetching weather data from weather stack....")
@@ -9,7 +9,7 @@ def fetch_data():
 
         res = requests.get(api_url)
         res.raise_for_status()
-        print("Api res received successgully.")
+        print("Api res received successfully.")
         return res.json()
     except requests.exceptions.RequestException as e:
         print(f"An error occured: {e}")
