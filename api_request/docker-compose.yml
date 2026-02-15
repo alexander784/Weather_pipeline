@@ -34,7 +34,7 @@ services:
     depends_on:
       - db
     networks:
-      - my_network
+      - my_networkapi_request/docker-compose.ym
     command: >
        bash -c "airflow db migrate && airflow standalone"
 

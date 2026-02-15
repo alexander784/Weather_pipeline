@@ -2,7 +2,7 @@
 
 A production-ready data pipeline that automatically fetches weather data from WeatherStack API, processes it, and stores it in PostgreSQL—all orchestrated by Apache Airflow and containerized with Docker.
 
-## 🎯 Project Overview
+## Project Overview
 
 This pipeline demonstrates key data engineering concepts:
 - **Extract**: Fetch real-time weather data from WeatherStack API
@@ -15,7 +15,9 @@ The pipeline runs automatically every 6 minutes with built-in error handling, au
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
+
+![alt text](image.png)
 
 ```
 WeatherStack API → Python ETL Script → PostgreSQL Database
@@ -28,7 +30,7 @@ WeatherStack API → Python ETL Script → PostgreSQL Database
 
 ---
 
-## 🛠️ Tech Stack
+## Tools
 
 - **Python 3.12** - ETL logic
 - **Apache Airflow** - Workflow orchestration
@@ -38,7 +40,7 @@ WeatherStack API → Python ETL Script → PostgreSQL Database
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before running this project, ensure you have:
 
