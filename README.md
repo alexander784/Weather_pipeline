@@ -1,6 +1,6 @@
 # Weather ETL Pipeline with Airflow & Docker
 
-A production-ready data pipeline that automatically fetches weather data from WeatherStack API, processes it, and stores it in PostgreSQL—all orchestrated by Apache Airflow and containerized with Docker.
+A production ready data pipeline that automatically fetches weather data from WeatherStack API, processes it, and stores it in PostgreSQL all orchestrated by Apache Airflow and containerized with Docker.
 
 ## Project Overview
 
@@ -11,7 +11,7 @@ This pipeline demonstrates key data engineering concepts:
 - **Orchestrate**: Automate with Apache Airflow
 - **Containerize**: Deploy anywhere with Docker
 
-The pipeline runs automatically every 6 minutes with built-in error handling, automatic retries, and email notifications on failures.
+The pipeline runs automatically every 6 minutes with built in error handling, automatic retries, and email notifications on failures.
 
 ---
 
@@ -19,14 +19,6 @@ The pipeline runs automatically every 6 minutes with built-in error handling, au
 
 ![alt text](image.png)
 
-```
-WeatherStack API → Python ETL Script → PostgreSQL Database
-                        ↑
-                  Apache Airflow
-                  (Orchestration & Scheduling)
-                        ↑
-                   Docker Containers
-```
 
 ---
 
@@ -68,7 +60,7 @@ api_url = "https://api.weatherstack.com/current?access_key=YOUR_API_KEY&query=Na
 Edit `docker-compose.yml` and add your Gmail credentials:
 ```yaml
 AIRFLOW__SMTP__SMTP_USER: your.email@gmail.com
-AIRFLOW__SMTP__SMTP_PASSWORD: your_gmail_app_password
+AIRFLOW__SMTP__SMTP_PASSWORD: yourgmailapppassword
 ```
 
 > **Note**: Use a [Gmail App Password](https://support.google.com/accounts/answer/185833), not your regular password.
