@@ -1,7 +1,7 @@
 import requests
 
 
-api_url = "https://api.weatherstack.com/current?access_key=bb&query=Nairobi"
+api_url = "https://api.weatherstack.com/current?access_key=c7c938710e613aa9fc104822f7e02b55&query=Nairobi"
 
 def fetch_data():
     print("Fetching weather data from weather stack....")

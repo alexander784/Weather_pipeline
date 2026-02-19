@@ -93,15 +93,24 @@ def main():
     conn = connect_to_db()
     create_table(conn)
 
-    data = fetch_data()
+    api_response = fetch_data()
+    
+    if not api_response:
+        raise ValueError("API response is empty")
+    
+    if "error" in api_response:
+        raise ValueError(f"API Error: {api_response['error']}")
+    
+    if "location" not in api_response or "current" not in api_response:
+        raise ValueError(f"Unexpected API response structure: {api_response}")
 
     data = {
-        "city": data["location"]["name"],
-        "temperature": data["current"]["temperature"],
-        "weather_descriptions": ", ".join(data["current"]["weather_descriptions"]),
-        "wind_speed": data["current"]["wind_speed"],
+        "city": api_response["location"]["name"],
+        "temperature": api_response["current"]["temperature"],
+        "weather_descriptions": ", ".join(api_response["current"]["weather_descriptions"]),
+        "wind_speed": api_response["current"]["wind_speed"],
         "time": datetime.utcnow(),
-        "utc_offset": data["location"]["utc_offset"]
+        "utc_offset": api_response["location"]["utc_offset"]
     }
 
     insert_records(conn, data)
